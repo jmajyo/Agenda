@@ -116,6 +116,10 @@ public class Control {
             {
                 agenda.delete(position);
                 System.out.println("Delected contact!");
+                LinkedList<Person> personasRescribir = agenda.getListOfPersons();
+                for (Person p:personasRescribir) {
+                    writtingInFile(p.getName(),p.getPhone());
+                }
             }else{
                 System.out.println("ERROR!");
             }
