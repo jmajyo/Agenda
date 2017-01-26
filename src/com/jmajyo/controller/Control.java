@@ -46,9 +46,13 @@ public class Control {
                 case QUIT:
                     Message.bye();
                     LinkedList<Person> personasRescribir = agenda.getListOfPersons();
+                    if(personasRescribir.size()== 0)
+                    {
+                        writtingInFile("","");
+                    }else{
                     for (Person p:personasRescribir) {
                         writtingInFile(p.getName(),p.getPhone());
-                    }
+                    }}
                     end = true;
                     break;
                 case HELP:
