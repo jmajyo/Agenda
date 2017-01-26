@@ -26,6 +26,12 @@ public class Control {
 
     public Control() {
         Message.title();
+        try{
+            Initialize();
+        }catch (Exception e)
+        {
+            //e.printStackTrace();
+        }
 
     }
 
@@ -45,7 +51,7 @@ public class Control {
                     Message.printHelp();
                     break;
                 case LIST:
-                    showPersons();
+                    agenda.print();
                     break;
                 case ADD:
                     addperson();
@@ -59,17 +65,29 @@ public class Control {
             }
         }
     }
-
-    private void showPersons() {
-        //List<String> file_names = archivo.readFile("agenda_name.txt");
-       // List<String> file_phones = archivo.readFile("agenda_phone.txt");
-        //Person p = new Person();
-       // for (int i = 0; i <file_names.size() ; i++) {
-       //     p.setName(file_names.get(i));
-       //     p.setPhone(file_phones.get(i));
-       //     agenda.add(p);
-       // }
-        agenda.print();
+    //coge lo que haya en el fichero de lectura y lo guarda en memoria, ademas se encarga de escribir otra vez en el archivo los
+    //datos para que se guarden para la sieguiente vez.
+    public void Initialize() {
+        List<String> file_names = archivo.readFile("agenda_name.txt");
+        List<String> file_phones = archivo.readFile("agenda_phone.txt");
+        if(file_names.size() == file_phones.size()){
+            for (int i = 0; i <file_names.size() ; i++) {
+                Person p = new Person();
+                p.setName(file_names.get(i));
+                p.setPhone(file_phones.get(i));
+                agenda.add(p);
+                try {
+                    names.add(p.getName());
+                    archivo.createFile("agenda_name.txt", names);
+                    phones.add(p.getPhone());
+                    archivo.createFile("agenda_phone.txt", phones);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }else{
+            System.out.println("Someone is trying to fuck the aplication");
+        }
     }
 
     void addperson(){
