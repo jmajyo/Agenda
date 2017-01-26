@@ -67,6 +67,7 @@ public class Control {
     }
     //coge lo que haya en el fichero de lectura y lo guarda en memoria, ademas se encarga de escribir otra vez en el archivo los
     //datos para que se guarden para la sieguiente vez.
+    //TODO arreglar excepción cuando no hay archivos.
     public void Initialize() {
         List<String> file_names = archivo.readFile("agenda_name.txt");
         List<String> file_phones = archivo.readFile("agenda_phone.txt");
@@ -76,14 +77,7 @@ public class Control {
                 p.setName(file_names.get(i));
                 p.setPhone(file_phones.get(i));
                 agenda.add(p);
-                try {
-                    names.add(p.getName());
-                    archivo.createFile("agenda_name.txt", names);
-                    phones.add(p.getPhone());
-                    archivo.createFile("agenda_phone.txt", phones);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                writtingInFile(p.getName(), p.getPhone());
             }
         }else{
             System.out.println("Someone is trying to fuck the aplication");
@@ -98,6 +92,10 @@ public class Control {
         Person persona = new Person(name, phone);
         agenda.add(persona);
         System.out.println("Saved new contact!");
+        writtingInFile(name, phone);
+    }
+
+    private void writtingInFile(String name, String phone) {
         try {
             names.add(name);
             archivo.createFile("agenda_name.txt", names);
@@ -107,7 +105,7 @@ public class Control {
             e.printStackTrace();
         }
     }
-
+    //TODO hacer que borre también de la lista de ficheros.
     void deleteperson(){
         System.out.println("Position to delete: ");
 
