@@ -45,6 +45,10 @@ public class Control {
             switch (com) {
                 case QUIT:
                     Message.bye();
+                    LinkedList<Person> personasRescribir = agenda.getListOfPersons();
+                    for (Person p:personasRescribir) {
+                        writtingInFile(p.getName(),p.getPhone());
+                    }
                     end = true;
                     break;
                 case HELP:
@@ -77,7 +81,7 @@ public class Control {
                 p.setName(file_names.get(i));
                 p.setPhone(file_phones.get(i));
                 agenda.add(p);
-                writtingInFile(p.getName(), p.getPhone());
+                //writtingInFile(p.getName(), p.getPhone());
             }
         }else{
             System.out.println("Someone is trying to fuck the aplication");
@@ -92,7 +96,7 @@ public class Control {
         Person persona = new Person(name, phone);
         agenda.add(persona);
         System.out.println("Saved new contact!");
-        writtingInFile(name, phone);
+        //writtingInFile(name, phone);
     }
 
     private void writtingInFile(String name, String phone) {
@@ -116,10 +120,10 @@ public class Control {
             {
                 agenda.delete(position);
                 System.out.println("Delected contact!");
-                LinkedList<Person> personasRescribir = agenda.getListOfPersons();
+                /*LinkedList<Person> personasRescribir = agenda.getListOfPersons();
                 for (Person p:personasRescribir) {
                     writtingInFile(p.getName(),p.getPhone());
-                }
+                }*/
             }else{
                 System.out.println("ERROR!");
             }
