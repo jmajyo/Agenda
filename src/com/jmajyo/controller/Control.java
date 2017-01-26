@@ -17,17 +17,14 @@ public class Control {
 
     ListOfPersons agenda = new ListOfPersons();
     Fichero archivo = new Fichero();
-    /*Para escribir en el fichero
-    List<String> p = new LinkedList<>();
-    String yo="hola";
-    String yo1="hola1";
-    String yo2="hola2";*/
+
+    List<String> names = new LinkedList<>();
+    List<String> phones = new LinkedList<>();
+
+
 
 
     public Control() {
-        /*p.add(yo);
-        p.add(yo1);
-        p.add(yo2);*/
         Message.title();
 
     }
@@ -48,16 +45,10 @@ public class Control {
                     Message.printHelp();
                     break;
                 case LIST:
-                    agenda.print();
+                    showPersons();
                     break;
                 case ADD:
                     addperson();
-                    /*Para escribir en el fichero
-                    try {
-                        archivo.createFile("agenda.txt", p);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }*/
                     break;
                 case DELETE:
                     deleteperson();
@@ -69,6 +60,18 @@ public class Control {
         }
     }
 
+    private void showPersons() {
+        //List<String> file_names = archivo.readFile("agenda_name.txt");
+       // List<String> file_phones = archivo.readFile("agenda_phone.txt");
+        //Person p = new Person();
+       // for (int i = 0; i <file_names.size() ; i++) {
+       //     p.setName(file_names.get(i));
+       //     p.setPhone(file_phones.get(i));
+       //     agenda.add(p);
+       // }
+        agenda.print();
+    }
+
     void addperson(){
         System.out.print("Name: ");
         String name = Prompt.read();
@@ -77,6 +80,14 @@ public class Control {
         Person persona = new Person(name, phone);
         agenda.add(persona);
         System.out.println("Saved new contact!");
+        try {
+            names.add(name);
+            archivo.createFile("agenda_name.txt", names);
+            phones.add(phone);
+            archivo.createFile("agenda_phone.txt", phones);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void deleteperson(){
