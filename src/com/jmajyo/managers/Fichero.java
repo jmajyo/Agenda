@@ -24,7 +24,8 @@ public class Fichero {
         try {
             fileReader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("No existe el fichero de datos, no hay contactos.");
         }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> lines = new ArrayList<String>();
@@ -36,7 +37,8 @@ public class Fichero {
             }
             bufferedReader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("Error, al leer los contactos.");
         }
         return lines;
     }

@@ -9,7 +9,6 @@ import com.jmajyo.view.Message;
 import com.jmajyo.view.Prompt;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +29,7 @@ public class Control {
             Initialize();
         }catch (Exception e)
         {
+            System.out.println("Lista de contactos vacía.");
             //e.printStackTrace();
         }
 
