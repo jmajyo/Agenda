@@ -29,7 +29,7 @@ public class Control {
             Initialize();
         }catch (Exception e)
         {
-            System.out.println("Lista de contactos vacía.");
+            System.out.println("lista de contactos vacía.");
             //e.printStackTrace();
         }
 
@@ -45,14 +45,7 @@ public class Control {
             switch (com) {
                 case QUIT:
                     Message.bye();
-                    LinkedList<Person> personasRescribir = agenda.getListOfPersons();
-                    if(personasRescribir.size()== 0)
-                    {
-                        writtingInFile("","");
-                    }else{
-                    for (Person p:personasRescribir) {
-                        writtingInFile(p.getName(),p.getPhone());
-                    }}
+                    saveInFiles();
                     end = true;
                     break;
                 case HELP:
@@ -73,6 +66,19 @@ public class Control {
             }
         }
     }
+
+    private void saveInFiles() {
+        LinkedList<Person> personasRescribir = agenda.getListOfPersons();
+        if(personasRescribir.size()== 0)
+        {
+            writtingInFile("","");
+        }else{
+            for (Person p:personasRescribir) {
+                writtingInFile(p.getName(),p.getPhone());
+            }
+        }
+    }
+
     //coge lo que haya en el fichero de lectura y lo guarda en memoria, ademas se encarga de escribir otra vez en el archivo los
     //datos para que se guarden para la sieguiente vez.
     public void Initialize() {
@@ -110,7 +116,7 @@ public class Control {
             e.printStackTrace();
         }
     }
-    //TODO hacer que borre también de la lista de ficheros.
+
     void deleteperson(){
         System.out.println("Position to delete: ");
 
