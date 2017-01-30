@@ -1,5 +1,7 @@
 package com.jmajyo.managers;
 
+import sun.rmi.runtime.Log;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ public class Fichero {
             fileReader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("No existe el fichero de datos, no hay contactos.");
+            System.out.print("No existe el fichero de datos, ");
         }
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         List<String> lines = new ArrayList<String>();
